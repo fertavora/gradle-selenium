@@ -10,6 +10,7 @@ buildscript {
 plugins {
     id 'java'
     id "io.qameta.allure" version "2.8.1"
+//    id "io.qameta.allure-adapter-base" version "2.9.6"
 }
 
 group 'tech.fertavora'
@@ -21,10 +22,11 @@ repositories {
 
 dependencies {
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
-    implementation group: 'io.qameta.allure', name: 'allure-java-commons', version: '2.13.9'
+    implementation group: 'io.qameta.allure', name: 'allure-java-commons', version: '2.17.1'
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.3'
     testImplementation group: 'org.testng', name: 'testng', version: '7.1.0'
     implementation group: 'com.google.guava', name: 'guava', version: '31.0-jre'
+//    allureRawResultElements(files("custom-allure-results"))
 }
 
 apply plugin: 'io.qameta.allure'
@@ -32,9 +34,9 @@ apply plugin: 'io.qameta.allure'
 allure {
     aspectjVersion = "1.9.2" // this is to have allure annotations working with java 11
     autoconfigure = true
-    version = '2.13.9'
+    version = '2.17.1'
     useTestNG {
-        version = '2.13.9'
+        version = '2.17.1'
     }
 }
 
@@ -42,6 +44,13 @@ test {
     testLogging {
         showStandardStreams = true
     }
-    useTestNG()
-//    allureReport()
+    useTestNG{
+        suiteXmlBuilder().suite(name: 'Sample Suite'){
+            test(name: 'Test Sample'){
+                packages(){
+                    'package'(name: 'tech.fertavora.gradle.tests.saucedemo')
+                }
+            }
+        }
+    }
 }

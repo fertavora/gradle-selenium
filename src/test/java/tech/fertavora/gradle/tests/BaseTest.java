@@ -18,7 +18,6 @@ import tech.fertavora.pageobjects.saucedemo.LoginPage;
 
 public class BaseTest {
     private static final String ARGUMENT_START_MAXIMIZED = "start-maximized";
-    private static final String ARGUMENT_HEADLESS = "--headless";
     private static final String ARGUMENT_WINDOWS_SIZE = "--window-size=1920,1080";
 
     protected static WebDriver driver;
@@ -29,10 +28,10 @@ public class BaseTest {
     public void startBrowser() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setHeadless(true);
         chromeOptions.addArguments(
                 ARGUMENT_WINDOWS_SIZE,
-                ARGUMENT_START_MAXIMIZED,
-                ARGUMENT_HEADLESS
+                ARGUMENT_START_MAXIMIZED
         );
         driver = new ChromeDriver(chromeOptions);
         loginPage = new LoginPage(driver);

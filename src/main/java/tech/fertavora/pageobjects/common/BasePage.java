@@ -1,7 +1,6 @@
 package tech.fertavora.pageobjects.common;
 
 import com.google.common.collect.Comparators;
-import com.google.common.collect.Ordering;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +17,10 @@ public abstract class BasePage {
     public BasePage(WebDriver driver){
         this.driver = driver;
         wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
+    }
+
+    protected void goToUrl(String urlString){
+        driver.get(urlString);
     }
 
     public WebElement waitForVisibility(By by){
@@ -45,6 +48,12 @@ public abstract class BasePage {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor)driver;
         return (String) javascriptExecutor.executeScript(String.format(
                 "return window.localStorage.getItem('%s');", key));
+    }
+
+    protected String setKeyValueOnLocalStorage(String key, String value){
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor)driver;
+        return (String) javascriptExecutor.executeScript(String.format(
+                "window.localStorage.setItem('%s', '%s');", key, value));
     }
 
     public void clickLink(String linkText){

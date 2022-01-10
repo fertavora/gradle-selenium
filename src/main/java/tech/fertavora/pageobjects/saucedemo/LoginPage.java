@@ -17,7 +17,7 @@ public class LoginPage extends BasePage {
 
     @Step("Test runner loads the log in page")
     public LoginPage getTo(){
-        driver.get(System.getenv("ENV_BASE_URL"));
+        goToUrl(System.getenv("ENV_BASE_URL"));
         return this;
     }
 

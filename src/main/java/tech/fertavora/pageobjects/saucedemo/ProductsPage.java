@@ -37,9 +37,9 @@ public class ProductsPage extends BasePage {
 
     @Step("Test runner loads the Products Page")
     public ProductsPage getTo(){
-        driver.get(System.getenv("ENV_BASE_URL"));
+        goToUrl(System.getenv("ENV_BASE_URL"));
         setCookie(driver,"session-username", "standard_user");
-        driver.get(System.getenv("ENV_BASE_URL")  + "/inventory.html");
+        goToUrl(System.getenv("ENV_BASE_URL")  + "/inventory.html");
         return this;
     }
 
