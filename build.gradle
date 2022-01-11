@@ -15,6 +15,11 @@ plugins {
 
 group 'tech.fertavora'
 version '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    testCompile
+}
 
 repositories {
     mavenCentral()

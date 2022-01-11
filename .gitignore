@@ -6,3 +6,4 @@ resources/screenshots/*.*
 /.allure/
 /src/test/resources/geckodriver
 /.settings/
+/gradle-selenium.iml
