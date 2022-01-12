@@ -1,5 +1,6 @@
 package tech.fertavora.pageobjects.saucedemo;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -17,6 +18,7 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
+    @Step("Test runner loads the Cart Page")
     public CartPage getTo(){
         goToUrl(System.getenv("ENV_BASE_URL"));
         setCookie(driver,"session-username", "standard_user");
@@ -25,26 +27,31 @@ public class CartPage extends BasePage {
         return this;
     }
 
+    @Step("User clicks the product title in the Cart Page")
     public ProductDetailsPage clickProductTitle(){
         waitForClickable(productLink).click();
         return new ProductDetailsPage(driver);
     }
 
+    @Step("User clicks the Remove button in the Cart Page")
     public CartPage clickRemoveButton(){
         waitForClickable(buttonRemove).click();
         return this;
     }
 
+    @Step("User clicks the Continue Shopping button in the Cart Page")
     public ProductsPage clickContinueShopping(){
         waitForClickable(buttonContinueShopping).click();
         return new ProductsPage(driver);
     }
 
+    @Step("User clicks the Checkout button in the Cart Page")
     public CheckoutPage clickCheckout(){
         waitForClickable(buttonCheckout).click();
         return new CheckoutPage(driver);
     }
 
+    @Step("Test runner returns whether cart is empty or not")
     public Boolean isCartEmpty(){
         ExpectedCondition<Boolean> isCartEmpty = ExpectedConditions.invisibilityOfElementLocated(sectionItems);
         return isCartEmpty.apply(driver);
