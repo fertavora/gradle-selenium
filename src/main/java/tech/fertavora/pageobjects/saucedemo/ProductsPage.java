@@ -43,13 +43,13 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
-    @Step("Test runner gets the product link by index {0}")
+//    @Step("Test runner gets the product link by index {0}")
     private WebElement getProductLinkByIndex(int linkIndex){
         waitForVisibility(allProductLinks);
         return driver.findElements(allProductLinks).get(linkIndex);
     }
 
-    @Step("Test runner gets the product link text by index {0}")
+//    @Step("Test runner gets the product link text by index {0}")
     public String getLinkTextByIndex(int linkIndex){
         return getProductLinkByIndex(linkIndex).getText();
     }

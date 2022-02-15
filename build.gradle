@@ -33,8 +33,8 @@ test {
         showStandardStreams = true
     }
     useTestNG{
-        suiteXmlBuilder().suite(name: 'Sample Suite'){
-            test(name: 'Test Sample'){
+        suiteXmlBuilder().suite(name: 'Sauce Demo Tests'){
+            test(name: 'Regression Tests'){
                 packages(){
                     'package'(name: 'tech.fertavora.gradle.tests.saucedemo')
                 }

@@ -23,7 +23,7 @@ public class BaseTest {
     protected static WebDriver driver;
     protected LoginPage loginPage;
 
-    @Step("Browser is opened.")
+//    @Step("Browser is opened.")
     @BeforeClass
     public void startBrowser() {
         WebDriverManager.chromedriver().setup();
@@ -42,7 +42,7 @@ public class BaseTest {
         loginPage.getTo();
     }
 
-    @Step("Browser is closed.")
+//    @Step("Browser is closed.")
     @AfterClass
     protected void closeBrowser(){
         driver.quit();
@@ -62,7 +62,7 @@ public class BaseTest {
         return camera.getScreenshotAs(OutputType.BYTES);
     }
 
-    @Step("Verify actual text matches expected text")
+//    @Step("Verify actual text matches expected text")
     protected void assertText(String actual, String expected){
         Assert.assertEquals(actual, expected);
     }

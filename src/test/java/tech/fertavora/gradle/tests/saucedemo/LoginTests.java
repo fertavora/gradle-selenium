@@ -15,8 +15,8 @@ public class LoginTests extends BaseTest {
     private ProductsPage productsPage;
 
     @Story("Successfull authentication")
-    @TmsLink("TC-1")
-    @Issue("TA-1")
+//    @TmsLink("TC-1")
+//    @Issue("TA-1")
     @Test(description = "User can succesfully sign in and lands in homepage.")
     public void successfulLogin() {
         loginPage.signIn("standard_user","secret_sauce");
