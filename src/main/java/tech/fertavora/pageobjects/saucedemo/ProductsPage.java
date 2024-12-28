@@ -1,6 +1,5 @@
 package tech.fertavora.pageobjects.saucedemo;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,13 +28,12 @@ public class ProductsPage extends BasePage {
     private final By allProductLinks = By.cssSelector("div[class=\"inventory_item_label\"] > a");
     private final By allProductPrices = By.cssSelector("div[class=\"inventory_item_price\"]");
     private final By linkShoppingCart = By.cssSelector("a[class=\"shopping_cart_link\"]");
-    private final By selectSorting = By.cssSelector("[data-test=\"product_sort_container\"]");
+    private final By selectSorting = By.cssSelector("[data-test=\"product-sort-container\"]");
 
     public ProductsPage(WebDriver driver){
         super(driver);
     }
 
-    @Step("Test runner loads the Products Page")
     public ProductsPage getTo(){
         goToUrl(System.getenv("ENV_BASE_URL"));
         setCookie(driver,"session-username", "standard_user");
@@ -43,23 +41,19 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
-//    @Step("Test runner gets the product link by index {0}")
     private WebElement getProductLinkByIndex(int linkIndex){
         waitForVisibility(allProductLinks);
         return driver.findElements(allProductLinks).get(linkIndex);
     }
 
-//    @Step("Test runner gets the product link text by index {0}")
     public String getLinkTextByIndex(int linkIndex){
         return getProductLinkByIndex(linkIndex).getText();
     }
 
-    @Step("Test runner gets list of products links texts")
     public List<String> getAllProductLinks(){
         return convertWebElementsToStrings(waitForAllVisibility(allProductLinks));
     }
 
-    @Step("Test runner gets list of products prices")
     public List<Double> getAllProductPrices(){
         return convertStringsToDoubles(convertWebElementsToStrings(waitForAllVisibility(allProductPrices)));
     }
@@ -72,24 +66,20 @@ public class ProductsPage extends BasePage {
         return doubles;
     }
 
-    @Step("Users clicks the backpack 'Add to cart' button")
     public void clickButtonAddBackpack(){
         waitForClickable(buttonAddBackpack).click();
     }
 
-    @Step("Users clicks the backpack title")
     public ProductDetailsPage clickLinkBackpack(){
         clickLink("Sauce Labs Backpack");
         return new ProductDetailsPage(driver);
     }
 
-    @Step("Users clicks the backpack image")
     public ProductDetailsPage clickImageBackpack(){
         waitForClickable(imageLinkBackpack).click();
         return new ProductDetailsPage(driver);
     }
 
-    @Step("Test runner gets the amount of products in cart")
     public String getProductsAmountInCart(){
         return driver.findElement(linkShoppingCart).getText();
     }
@@ -98,7 +88,6 @@ public class ProductsPage extends BasePage {
         return getKeyValueFromLocalStorage("cart-contents");
     }
 
-    @Step("User selects {0} from sorting drop down")
     public void selectSorting(String option){
         Select sorting = new Select(waitForVisibility(selectSorting));
         sorting.selectByVisibleText(option);

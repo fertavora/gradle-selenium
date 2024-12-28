@@ -1,11 +1,12 @@
 package tech.fertavora.gradle.tests.saucedemo;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import tech.fertavora.gradle.tests.BaseTest;
 import tech.fertavora.pageobjects.saucedemo.ProductDetailsPage;
 import tech.fertavora.pageobjects.saucedemo.ProductsPage;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductsTests extends BaseTest {
     private static final String EXPECTED_PRODUCTS_IN_CART = "1";
@@ -20,13 +21,13 @@ public class ProductsTests extends BaseTest {
     private ProductsPage productsPage;
     private ProductDetailsPage productDetailsPage;
 
-    @BeforeMethod
+    @BeforeEach
     public void productsPage(){
         productsPage = new ProductsPage(driver);
         productsPage.getTo();
     }
 
-    @Test(description = "User adds a product to cart from Products Page.")
+    @Test
     public void addProductToCartFromProductsPage(){
         productsPage.clickButtonAddBackpack();
 
@@ -36,33 +37,33 @@ public class ProductsTests extends BaseTest {
         assertText(actualCartAmountInLocalStorage, EXPECTED_PRODUCT_ID_IN_LOCAL_STORAGE);
     }
 
-    @Test(description = "User goes to Product Details by clicking Product title")
+    @Test
     public void goToProductDetailsByTitleClick(){
         productDetailsPage = productsPage.clickLinkBackpack();
         String actualItemTitle = productDetailsPage.getItemTitle();
         assertText(actualItemTitle, EXPECTED_PRODUCT_TITLE);
     }
 
-    @Test(description = "User goes to Product Details by clicking Product image")
+    @Test
     public void goToProductDetailsByImageClick(){
         productDetailsPage = productsPage.clickImageBackpack();
         String actualItemTitle = productDetailsPage.getItemTitle();
         assertText(actualItemTitle, EXPECTED_PRODUCT_TITLE);
     }
 
-    @Test(description = "User sort products from Z to A and then reverts to A to Z")
+    @Test
     public void sortProductsAlphabetically(){
         productsPage.selectSorting(SORTING_NAME_Z_TO_A);
-        Assert.assertTrue(productsPage.areStringsReversedSorted(productsPage.getAllProductLinks()));
+        assertTrue(productsPage.areStringsReversedSorted(productsPage.getAllProductLinks()));
         productsPage.selectSorting(SORTING_NAME_A_TO_Z);
-        Assert.assertTrue(productsPage.areStringsSorted(productsPage.getAllProductLinks()), SORTING_ERROR_MESSAGE);
+        assertTrue(productsPage.areStringsSorted(productsPage.getAllProductLinks()), SORTING_ERROR_MESSAGE);
     }
 
-    @Test(description = "User sort products by price low to high and then reverts to high to low")
+    @Test
     public void sortProductsByPrice(){
         productsPage.selectSorting(SORTING_PRICE_LOW_TO_HIGH);
-        Assert.assertTrue(productsPage.areDoublesSorted(productsPage.getAllProductPrices()), SORTING_ERROR_MESSAGE);
+        assertTrue(productsPage.areDoublesSorted(productsPage.getAllProductPrices()), SORTING_ERROR_MESSAGE);
         productsPage.selectSorting(SORTING_PRICE_HIGH_TO_LOW);
-        Assert.assertTrue(productsPage.areDoublesReversedSorted(productsPage.getAllProductPrices()), SORTING_ERROR_MESSAGE);
+        assertTrue(productsPage.areDoublesReversedSorted(productsPage.getAllProductPrices()), SORTING_ERROR_MESSAGE);
     }
 }

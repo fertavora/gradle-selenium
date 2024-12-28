@@ -1,6 +1,5 @@
 package tech.fertavora.pageobjects.saucedemo;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import tech.fertavora.pageobjects.common.BasePage;
@@ -15,20 +14,17 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("Test runner loads the log in page")
     public LoginPage getTo(){
         goToUrl(System.getenv("ENV_BASE_URL"));
         return this;
     }
 
-    @Step("The user signs into the app as {0}")
     public void signIn(String username, String password){
         this.enterUsername(username)
             .enterPassword(password)
             .clickButtonLogin();
     }
 
-    @Step("Test runner gets the error message text")
     public String getErrorMessage(){
         return waitForVisibility(textErrorMessage).getText();
     }

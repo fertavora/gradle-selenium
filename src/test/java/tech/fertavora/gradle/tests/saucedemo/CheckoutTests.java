@@ -1,7 +1,7 @@
 package tech.fertavora.gradle.tests.saucedemo;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import tech.fertavora.gradle.tests.BaseTest;
 import tech.fertavora.pageobjects.saucedemo.CartPage;
 import tech.fertavora.pageobjects.saucedemo.CheckoutPage;
@@ -9,20 +9,20 @@ import tech.fertavora.pageobjects.saucedemo.PaymentInformationPage;
 
 public class CheckoutTests extends BaseTest {
     private static final String EXPECTED_PAYMENT_INFORMATION_TEXT = "SauceCard #31337";
-    private static final String EXPECTED_SHIPPING_INFORMATION_TEXT = "FREE PONY EXPRESS DELIVERY!";
+    private static final String EXPECTED_SHIPPING_INFORMATION_TEXT = "Free Pony Express Delivery!";
     private static final String EXPECTED_INVENTORY_ITEM_PRICE_TEXT = "$29.99";
     private static final String EXPECTED_SUBTOTAL_PRICE_TEXT = "Item total: $29.99";
-    private static final String EXPECTED_COMPLETE_CHECKOUT_TEXT = "THANK YOU FOR YOUR ORDER";
+    private static final String EXPECTED_COMPLETE_CHECKOUT_TEXT = "Thank you for your order!";
 
     private CartPage cartPage;
 
-    @BeforeMethod
+    @BeforeEach
     public void cartPage(){
         cartPage = new CartPage(driver);
         cartPage.getTo();
     }
 
-    @Test(description = "User completes checkout from Cart Page")
+    @Test
     public void checkoutTest(){
         CheckoutPage checkoutPage = cartPage.clickCheckout();
         PaymentInformationPage paymentInformationPage = checkoutPage.enterFirstName("John")

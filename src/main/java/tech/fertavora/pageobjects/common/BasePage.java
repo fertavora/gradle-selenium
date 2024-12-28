@@ -5,18 +5,20 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public abstract class BasePage {
-    public static final long TIME_OUT_IN_SECONDS = 2;
+    public static final long TIME_OUT_IN_SECONDS = 5;
     protected WebDriver driver;
     private final WebDriverWait wait;
 
     public BasePage(WebDriver driver){
         this.driver = driver;
-        wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
+        Duration timeoutDuration = Duration.ofSeconds(TIME_OUT_IN_SECONDS);
+        wait = new WebDriverWait(driver, timeoutDuration);
     }
 
     protected void goToUrl(String urlString){
